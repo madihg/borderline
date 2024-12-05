@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Beirut Channel B612</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #videoElement {
+            width: 80%;
+            height: auto;
+        }
+        .overlay-image {
+            position: absolute;
+            top: 10%;
+            right: 15%;
+            width: 20%;
+            height: auto;
+            z-index: 10;
+        }
+        .circle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video id="videoElement" autoplay></video>
+        <img src="assets/newbeirut.png" alt="New Beirut" class="overlay-image">
+    </div>
+    
+    <div class="circle" id="circle">
+        ◯
+    </div>
+
+    <script>
+        const video = document.getElementById('videoElement');
+        const circle = document.getElementById('circle');
+
+        // Request access to the webcam
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error('Error accessing webcam: ', error);
+                });
+        } else {
+            alert('Your browser does not support webcam access.');
+        }
+
+        // Open the specified file when the circle is clicked
+        circle.addEventListener('click', function() {
+            window.location.href = 'file:///Users/halimmadi/Desktop/Borderline%20counterpulse/Code/Borderline/1a-solo-airport.html';
+        });
+    </script>
+</body>
+</html>

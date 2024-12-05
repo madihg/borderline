@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBRI isolates red thread music</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #headline {
+            font-size: 2.5em; /* Increased to make the title bigger */
+            font-weight: bold;
+        }
+        #play-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+        #sound-emojis {
+            font-size: 1.5em;
+        }
+        #comments {
+            margin-top: 30px;
+        }
+        #comment-list {
+            margin-top: 20px;
+            padding-left: 20px;
+            font-size: 2em; /* Doubled the size of the comments */
+        }
+        .comment {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            border-left: 2px solid #ccc;
+        }
+        #account-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            width: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="headline">
+        New Beirut Research Institute Scientists isolate red thread music
+    </div>
+    <h3>NBRI Scientists have identified the tune as an accompaniment to a kind of “Zajal” called “dal3ona” – a long lost form of oral poetry performed in colloquial dialects. The institute shared the recording below.</h3>
+    <button id="play-button">Play Dal3ona Recording</button>
+    <span id="sound-emojis"></span>
+    <hr>
+    <h3> 🔒 💵 Pay to access the rest of the content 💵 🔒</h3>
+    <hr>
+
+    <div id="comments">
+        <h3>Comments</h3>
+        <input type="text" id="comment-input" placeholder="Write a comment...">
+        <button id="share-button">Share</button>
+        <div id="comment-list"></div>
+    </div>
+
+    <img id="account-icon" src="https://cdn.icon-icons.com/icons2/3054/PNG/512/account_profile_user_icon_190494.png" alt="Account Icon" title="Account">
+
+    <script>
+        const playButton = document.getElementById('play-button');
+        const soundEmojis = document.getElementById('sound-emojis');
+        const commentInput = document.getElementById('comment-input');
+        const shareButton = document.getElementById('share-button');
+        const commentList = document.getElementById('comment-list');
+        const accountIcon = document.getElementById('account-icon');
+
+        playButton.addEventListener('click', () => {
+            // Display sound emojis for 20 seconds
+            soundEmojis.textContent = '🔊';
+            setTimeout(() => {
+                soundEmojis.textContent = '';
+            }, 20000);
+        });
+
+        shareButton.addEventListener('click', () => {
+            const commentText = commentInput.value;
+            if (commentText) {
+                const randomName = getRandomArabicName();
+                const newComment = document.createElement('div');
+                newComment.className = 'comment';
+                newComment.innerHTML = `<strong>${randomName}</strong>: ${commentText}`;
+                
+                // Add the new comment to the top of the comment list
+                commentList.insertBefore(newComment, commentList.firstChild);
+
+                // Clear the input field and put the cursor back
+                commentInput.value = '';
+                commentInput.focus();
+            }
+        });
+
+        function getRandomArabicName() {
+            const names = ['Omar', 'Ali', 'Layla', 'Noor', 'Hassan', 'Kareem', 'Zain', 'Fatima', 'Yasmine', 'Hadi', 'Joseph', 'Mathilde'];
+            const randomIndex = Math.floor(Math.random() * names.length);
+            const randomNumber = Math.floor(Math.random() * 100);
+            return names[randomIndex] + randomNumber;
+        }
+
+        accountIcon.addEventListener('click', () => {
+            window.location.href = '/Users/halimmadi/Desktop/Borderline%20counterpulse/Code/Borderline/3b-exhibit-0-case.html';
+        });
+    </script>
+</body>
+</html>

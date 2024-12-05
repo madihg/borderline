@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It turns out</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: white;
+        }
+        #chameleon-image {
+            position: absolute;
+            width: 80vw;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid white;
+            outline: 1px solid black;
+            z-index: 1;
+        }
+        #inputField {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            padding: 5px;
+            z-index: 3;
+            font-family: "Times New Roman", Times, serif;
+        }
+        #hiddenButton {
+            position: absolute;
+            top: 20px;
+            left: 250px;
+            font-size: 20px;
+            padding: 5px;
+            visibility: hidden;
+            z-index: 3;
+            font-family: "Times New Roman", Times, serif;
+        }
+        #moreButton {
+            position: absolute;
+            top: 20px;
+            left: 250px;
+            font-size: 20px;
+            padding: 5px;
+            visibility: hidden;
+            z-index: 3;
+            font-family: "Times New Roman", Times, serif;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="inputField" placeholder="Type here...">
+    <button id="hiddenButton">we never cross</button>
+    <button id="moreButton">more</button>
+    <img id="chameleon-image" src="https://timcoster.files.wordpress.com/2016/10/chameleonsmallwhitebg.png" alt="Chameleon">
+    <canvas id="brushCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('brushCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size to match the window
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.position = 'absolute';
+        canvas.style.zIndex = '2';
+        
+        let colors = [
+            'rgba(255, 0, 0, 0.1)',  // Red (more transparent)
+            'rgba(255, 165, 0, 0.1)', // Orange (more transparent)
+            'rgba(255, 192, 203, 0.1)', // Pink (more transparent)
+            'rgba(255, 69, 0, 0.1)', // Dark Orange (more transparent)
+            'rgba(255, 105, 180, 0.1)', // Hot Pink (more transparent)
+            'rgba(220, 20, 60, 0.1)'  // Crimson (more transparent)
+        ];
+        let currentColorIndex = 0;
+        let isDrawing = false;
+
+        // Event listeners for drawing
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
+            ctx.strokeStyle = colors[currentColorIndex];
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(e.clientX, e.clientY);
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDrawing) {
+                ctx.lineTo(e.clientX, e.clientY);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            ctx.closePath();
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDrawing = false;
+            ctx.closePath();
+        });
+
+        // Update canvas size on window resize
+        window.addEventListener('resize', () => {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.putImageData(imageData, 0, 0);
+        });
+
+        // Input field event listener to reveal buttons
+        const inputField = document.getElementById('inputField');
+        const hiddenButton = document.getElementById('hiddenButton');
+        const moreButton = document.getElementById('moreButton');
+        inputField.addEventListener('input', () => {
+            if (inputField.value === 'we become the borders') {
+                hiddenButton.style.visibility = 'visible';
+            } else {
+                hiddenButton.style.visibility = 'hidden';
+            }
+
+            if (inputField.value.toLowerCase() === 'desire') {
+                moreButton.style.visibility = 'visible';
+            } else {
+                moreButton.style.visibility = 'hidden';
+            }
+        });
+
+        // Button click event to open a new window
+        hiddenButton.addEventListener('click', () => {
+            window.open('/Users/halimmadi/Desktop/Borderline counterpulse/Code/Borderline/1b-kobayat.html', '_blank', 'width=1000,height=800,left=350,top=150,toolbar=no,scrollbars=no,resizable=yes');
+        });
+
+        moreButton.addEventListener('click', () => {
+            window.open('/Users/halimmadi/Desktop/Borderline counterpulse/Code/Borderline/3d-reach.html', '_blank', 'width=800,height=400,left=750,top=250,toolbar=no,scrollbars=no,resizable=yes');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The village</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('assets/kobayat.jpg') no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .squiggly-line {
+      position: absolute;
+      bottom: 25%; /* Position closer to the bottom */
+      left: 0;
+      width: 100vw; /* Full viewport width */
+      height: 10px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    path {
+      stroke: red;
+      stroke-width: 6;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+</head>
+<body>
+  <div class="squiggly-line">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+      <path d="M0 5 Q 5 0, 10 5 T 20 5 T 30 5 T 40 5 T 50 5 T 60 5 T 70 5 T 80 5 T 90 5 T 100 5" />
+    </svg>
+  </div>
+
+  <script>
+    document.body.addEventListener('click', function() {
+      window.location.href = '/Users/halimmadi/Desktop/Borderline counterpulse/Code/Borderline/1c-artist-monopoly.html';
+    });
+  </script>
+</body>
+</html>

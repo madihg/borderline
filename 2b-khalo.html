@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📞 Khalo Johnny 📞</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .full-height-image {
+            max-height: calc(100vh - 10px); /* Adjust height to account for margin */
+            width: auto;   /* Maintain aspect ratio */
+            border: 1px solid white;
+            outline: 1px solid black;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .background-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: -1;
+        }
+        .background-line::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: red;
+            border-radius: 50%;
+            transform: rotate(0deg) scaleX(5) translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-line"></div>
+    <a href="file:///Users/halimmadi/Desktop/Borderline%20counterpulse/Code/Borderline/2c-elite-passport.html">
+        <img src="assets/khalo.png" alt="Khalo Image" class="full-height-image">
+    </a>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibit A</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            font-size: 22px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #background-image {
+            width: 90vw;
+            height: 90vh;
+            background-image: url('assets/portrait.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid white;
+            outline: 1px solid black;
+            position: relative;
+        }
+        .circle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 0, 0, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .text {
+            position: absolute;
+            background: white;
+            border: 1px solid white;
+            outline: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="background-image"></div>
+    <script>
+        let clickCount = 0;
+        
+        document.getElementById('background-image').addEventListener('click', function(event) {
+            clickCount++;
+            let circle = document.createElement('div');
+            circle.className = 'circle';
+            document.body.appendChild(circle);
+
+            circle.style.left = `${event.pageX}px`;
+            circle.style.top = `${event.pageY}px`;
+            
+            let text = document.createElement('div');
+            text.className = 'text';
+            document.body.appendChild(text);
+
+            if (clickCount === 1) {
+                text.textContent = 'Artifact 1: شعرك متل البنات متل الغيث';
+                text.style.left = `${event.pageX}px`;
+                text.style.top = `${event.pageY - 110}px`;
+            } else if (clickCount === 2) {
+                text.textContent = 'Artifact 2: وهل حلقات نشالله بدك تصير رئاسة كمن';
+                text.style.left = `${event.pageX + 120}px`;
+                text.style.top = `${event.pageY}px`;
+            } else if (clickCount === 3) {
+                text.textContent = 'Artifact 3: حلوق هل لحيه شكلك متل الارهبه';
+                text.style.left = `${event.pageX - 220}px`;
+                text.style.top = `${event.pageY}px`;
+            }
+        });
+    </script>
+</body>
+</html>

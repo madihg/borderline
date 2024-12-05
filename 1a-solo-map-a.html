@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In every place I landed</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            font-family: "Times New Roman", Times, serif;
+        }
+        #map-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #map-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid white;
+            outline: 1px solid black;
+            cursor: crosshair;
+        }
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        #text-field {
+            font-size: 22px;
+            font-family: "Times New Roman", Times, serif;
+        }
+        #hidden-button {
+            font-size: 22px;
+            font-family: "Times New Roman", Times, serif;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="text-field" placeholder="...">
+        <button id="hidden-button">I grew</button>
+    </div>
+    <div id="map-container">
+        <img id="map-image" src="https://static.vecteezy.com/system/resources/previews/010/158/604/non_2x/white-background-of-world-map-with-line-art-design-free-vector.jpg" alt="World Map">
+        <svg id="map-overlay"></svg>
+    </div>
+
+    <script>
+        const mapImage = document.getElementById('map-image');
+        const svg = document.getElementById('map-overlay');
+        let lastPoint = null;
+        const colors = ["#FF0000", "#FF4500", "#FF6347", "#FF69B4", "#FFA500", "#FFB6C1", "#FF8C00", "#FF1493"];
+        let colorIndex = 0;
+
+        mapImage.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            if (lastPoint) {
+                drawLine(lastPoint.x, lastPoint.y, x, y, colors[colorIndex]);
+                colorIndex = (colorIndex + 1) % colors.length;
+            }
+            // Draw a dot at the click position
+            drawDot(x, y, colors[colorIndex]);
+            colorIndex = (colorIndex + 1) % colors.length;
+            
+            // Update lastPoint with the current click position
+            lastPoint = {x, y};
+        });
+
+        function drawLine(x1, y1, x2, y2, color) {
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', x1);
+            line.setAttribute('y1', y1);
+            line.setAttribute('x2', x2);
+            line.setAttribute('y2', y2);
+            line.setAttribute('stroke', color);
+            line.setAttribute('stroke-width', '2');
+            svg.appendChild(line);
+        }
+
+        function drawDot(x, y, color) {
+            const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', x);
+            dot.setAttribute('cy', y);
+            dot.setAttribute('r', '4');
+            dot.setAttribute('fill', color);
+            svg.appendChild(dot);
+        }
+
+        const textField = document.getElementById('text-field');
+        const hiddenButton = document.getElementById('hidden-button');
+
+        textField.addEventListener('input', function() {
+            if (textField.value.toLowerCase() === 'the chameleon skin') {
+                hiddenButton.style.visibility = 'visible';
+            } else {
+                hiddenButton.style.visibility = 'hidden';
+            }
+        });
+
+        hiddenButton.addEventListener('click', function() {
+            window.open('1a-solo-map-b-chameleon.html', '_blank', 'width=600,height=400,left=750,top=250,toolbar=no,scrollbars=no,resizable=yes');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red line project / Monopoly</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('assets/monopoly.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #counter-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #counter-box:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        @media (max-width: 600px) {
+            #counter-box {
+                font-size: 1.2em;
+                padding: 15px;
+                margin: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="counter-box">1 USD = 1 LBP</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const counterBox = document.getElementById('counter-box');
+            let currentLBP = 1;
+            const increments = [100, 1000, 10000, 100000];
+            let incrementIndex = 0;
+
+            counterBox.addEventListener('click', () => {
+                if (incrementIndex < increments.length) {
+                    currentLBP = increments[incrementIndex];
+                    incrementIndex++;
+                    counterBox.innerHTML = `1 USD = ${currentLBP.toLocaleString()} LBP`;
+                } else {
+                    window.location.href = '/Users/halimmadi/Desktop/Borderline counterpulse/Code/Borderline/1d-artist-beirut.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

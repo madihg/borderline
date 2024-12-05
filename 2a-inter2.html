@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Beirut Research Institute</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-image: url('https://images.stockcake.com/public/a/3/7/a37c79ba-9ff4-4d2a-814a-a680d65fe98a_large/press-conference-speech-stockcake.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .black-background {
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            background-color: black;
+            z-index: 4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #videoElement {
+            width: 40%;
+            height: auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .overlay-image {
+            position: relative;
+            top: 20px;
+            left: 20px;
+            width: 20%;
+            height: auto;
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        .document-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 2px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 7;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .new-beirut-middle {
+            position: absolute;
+            top: 35%;
+            left: 60%;
+            width: 15%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .circle-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            color: black;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="black-background"></div>
+        <video id="videoElement" autoplay></video>
+    </div>
+    <img src="assets/newbeirut.png" alt="New Beirut" class="new-beirut-middle">
+    <button class="document-button" onclick="openDocument()">📄</button>
+    <button class="circle-button" onclick="openCirclePage()">○</button>
+
+    <script>
+        const video = document.getElementById('videoElement');
+        const overlayImage = document.querySelector('.overlay-image');
+
+        // Update overlay image to position relative to the video element once it's loaded
+        video.addEventListener('loadedmetadata', function () {
+            const videoRect = video.getBoundingClientRect();
+            overlayImage.style.top = `${videoRect.top + window.scrollY + 10}px`;
+            overlayImage.style.left = `${videoRect.left + window.scrollX + 10}px`;
+        });
+
+        // Request access to the webcam
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.error('Error accessing webcam: ', error);
+                });
+        } else {
+            alert('Your browser does not support webcam access.');
+        }
+
+        // Open document function
+        function openDocument() {
+            window.open('file:///Users/halimmadi/Desktop/Borderline%20counterpulse/Code/Borderline/0a-zajal.html', '_blank', 'width=600,height=400,left=800,top=250,toolbar=no,scrollbars=no,resizable=yes');
+        }
+
+        // Open circle page function
+        function openCirclePage() {
+            window.location.href = 'file:///Users/halimmadi/Desktop/Borderline%20counterpulse/Code/Borderline/2a-solo-border.html';
+        }
+    </script>
+</body>
+
+</html>

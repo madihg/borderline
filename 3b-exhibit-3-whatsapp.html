@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibit C</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e5ddd5;
+            color: #111;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .message-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .profile-picture {
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-right: 10px;
+        }
+
+        .message-body {
+            display: flex;
+            align-items: center;
+        }
+
+        .audio-button {
+            margin: 0;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+        }
+
+        .audio-button img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .audio-bar {
+            background-color: #d9d9d9;
+            height: 6px;
+            width: 75%;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .audio-bar-fill {
+            background-color: #25d366;
+            height: 100%;
+            width: 0;
+            border-radius: 3px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .time-stamp {
+            font-size: 0.8em;
+            color: #777;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="message-container">
+        <div class="message-header">
+            <img class="profile-picture" src="https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonaskakaroto-736230.jpg&fm=jpg" alt="Profile Picture">
+            <strong>Josephine Madi &bull; You</strong>
+        </div>
+        <div class="message-body">
+            <button class="audio-button" onclick="playAudio('audio1', this)">
+                <img src="https://cdn-icons-png.flaticon.com/512/4028/4028496.png" alt="Play Button">
+            </button>
+            <audio id="audio1" src="audio1.mp3"></audio>
+            <div class="audio-bar">
+                <div class="audio-bar-fill" id="audio-bar-fill-1"></div>
+            </div>
+            <div class="time-stamp">10/9/2024 &bull; 10:18 AM</div>
+        </div>
+    </div>
+
+    <div class="message-container">
+        <div class="message-header">
+            <img class="profile-picture" src="https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonaskakaroto-736230.jpg&fm=jpg" alt="Profile Picture">
+            <strong>Josephine Madi &bull; You</strong>
+        </div>
+        <div class="message-body">
+            <button class="audio-button" onclick="playAudio('audio2', this)">
+                <img src="https://cdn-icons-png.flaticon.com/512/4028/4028496.png" alt="Play Button">
+            </button>
+            <audio id="audio2" src="audio2.mp3"></audio>
+            <div class="audio-bar">
+                <div class="audio-bar-fill" id="audio-bar-fill-2"></div>
+            </div>
+            <div class="time-stamp">10/2/2024 &bull; 5:56 AM</div>
+        </div>
+    </div>
+
+    <div class="message-container">
+        <div class="message-header">
+            <img class="profile-picture" src="https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?cs=srgb&dl=pexels-jonaskakaroto-736230.jpg&fm=jpg" alt="Profile Picture">
+            <strong>Josephine Madi &bull; You</strong>
+        </div>
+        <div class="message-body">
+            <button class="audio-button" onclick="playAudio('audio3', this)">
+                <img src="https://cdn-icons-png.flaticon.com/512/4028/4028496.png" alt="Play Button">
+            </button>
+            <audio id="audio3" src="audio3.mp3"></audio>
+            <div class="audio-bar">
+                <div class="audio-bar-fill" id="audio-bar-fill-3"></div>
+            </div>
+            <div class="time-stamp">10/9/2024 &bull; 3:02 AM</div>
+        </div>
+    </div>
+
+    <script>
+        function playAudio(audioId, button) {
+            const audio = document.getElementById(audioId);
+            const audioBarFill = document.getElementById(`audio-bar-fill-${audioId.charAt(audioId.length - 1)}`);
+            const playButtonImg = button.querySelector('img');
+            
+            if (audio.paused) {
+                audio.play();
+                // Keep play button as it is
+                audioBarFill.style.width = '0%';
+                audioBarFill.style.transition = 'width 5s linear';
+                setTimeout(() => {
+                    audioBarFill.style.width = '100%';
+                }, 10);
+                audio.onended = function () {
+                    audioBarFill.style.width = '0%';
+                };
+            } else {
+                audio.pause();
+                audioBarFill.style.width = '0%';
+            }
+        }
+    </script>
+
+</body>
+</html>

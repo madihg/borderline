@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Frame with Red Lines</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .video-frame {
+            width: 400px;
+            height: 400px;
+            border: 2px solid #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        video {
+            width: 800px;
+            height: 800px;
+            object-fit: cover;
+        }
+
+        .red-line {
+            position: absolute;
+            width: 6px;
+            height: 50px;
+            background-color: red;
+            transform: rotate(calc(var(--random-angle)));
+        }
+    </style>
+</head>
+<body>
+    <div class="video-frame">
+        <video id="video" autoplay></video>
+    </div>
+
+    <script>
+        // Get access to the user's camera and display the video in the square frame
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                const videoElement = document.getElementById('video');
+                videoElement.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+            });
+
+        // Create 37 small red lines and place them randomly on the screen
+        for (let i = 0; i < 37; i++) {
+            const line = document.createElement('div');
+            line.classList.add('red-line');
+            line.style.top = Math.random() * window.innerHeight + 'px';
+            line.style.left = Math.random() * window.innerWidth + 'px';
+            const randomAngle = Math.random() * 160 - 80; // Random angle between -80 and 80 degrees
+            line.style.transform = `rotate(${randomAngle}deg)`;
+            document.body.appendChild(line);
+        }
+    </script>
+</body>
+</html>

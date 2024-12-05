@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red line project x Today</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+        .image-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            height: 90vh;
+            border: 2px solid black;
+            outline: 20px solid white;
+            background: url('assets/beirut.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -2;
+        }
+        #reset-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            color: black;
+            font-size: 15px;
+            padding: 2px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.6;
+            z-index: 1;
+        }
+        .top-image {
+            position: absolute;
+            top: 20%;
+            left: 25%;
+            width: 450px;
+            height: auto;
+            cursor: pointer;
+            border: 1px solid white;
+            outline: 1px solid black;
+        }
+        #image2 {
+            left: 20%;
+            z-index: 4;
+        }
+        #image1 {
+            z-index: 3;
+        }
+        #open-link-button {
+            position: absolute;
+            bottom: 10px;
+            right: 50px;
+            background: white;
+            color: black;
+            font-size: 15px;
+            padding: 2px;
+            border: none;
+            cursor: pointer;
+            opacity: 0.6;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container"></div>
+    <img src="assets/drip.jpg" class="top-image" id="image1" alt="Drip Image">
+    <img src="assets/paint.jpg" class="top-image" id="image2" alt="Paint Image">
+    <button id="reset-button">x</button>
+    <button id="open-link-button">○</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script>
+        let lineDrawn = false;
+
+        function setup() {
+            const canvas = createCanvas(windowWidth, windowHeight);
+            canvas.position(0, 0);
+            canvas.style('z-index', '0');
+
+            let centerX = width / 2;
+            let centerY = height / 2;
+            let x1 = centerX + random(-50, 50);
+            let y1 = centerY + random(-50, 50);
+            let x2 = x1 + random(30, 100);
+            let y2 = y1 + random(30, 100);
+            let x3 = x1 + random(30, 100);
+
+            noFill();
+            stroke(255, 0, 0);
+            strokeWeight(2);
+            triangle(x1, y1, x2, y2, x3, y2 + random(20, 60));
+        }
+
+        function draw() {
+            if (mouseIsPressed && mouseButton === LEFT) {
+                stroke(255, 0, 0);
+                strokeWeight(3);
+                line(pmouseX, pmouseY, mouseX, mouseY);
+                lineDrawn = true;
+            }
+        }
+
+        document.getElementById('reset-button').addEventListener('click', () => {
+            if (lineDrawn) {
+                clear();
+                lineDrawn = false;
+                setup();
+            }
+        });
+
+        document.getElementById('open-link-button').addEventListener('click', () => {
+            window.location.href = '/Users/halimmadi/Desktop/Borderline counterpulse/Code/Borderline/1e-zeina.html';
+        });
+
+        document.getElementById('image1').addEventListener('click', () => {
+            document.getElementById('image1').style.display = 'none';
+        });
+
+        document.getElementById('image2').addEventListener('click', () => {
+            document.getElementById('image2').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Passport</title>
+    <style>
+        body::before {
+            content: '';
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100vw;
+            height: 10px;
+            z-index: -1;
+        }
+
+        .squiggly-line {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100vw;
+            height: 10px;
+            z-index: -1;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        path {
+            stroke: red;
+            stroke-width: 6;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        body {
+            background-color: white;
+            font-size: 22px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .image-container {
+            width: 50%;
+            height: 50vh;
+            margin: 0 auto;
+            border: 1px solid white;
+            outline: 1px solid black;
+            position: fixed;
+            top: 25%;
+            left: 25%;
+            z-index: -2;
+            transform-origin: center;
+        }
+
+        .horizon-image {
+            width: 100%;
+            height: 100%;
+            border: 1px solid white;
+            outline: 1px solid black;
+        }
+
+        .sparkle-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .form-container {
+            width: 60%;
+            margin: 0 auto;
+            position: relative;
+            top: 10%;
+            border: 1px solid white;
+            outline: 1px solid black;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+        }
+
+        .next-button {
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Initial Image -->
+    <div id="image-step" class="image-container">
+        <img src="assets/horizon.jpg" alt="Horizon" class="horizon-image">
+        <button class="sparkle-button"
+            onclick="window.open('https://www.instagram.com/p/DAVLrcst5Fn/', '_blank', 'width=375,height=800,left=500,top=250,toolbar=no,scrollbars=no,resizable=yes'); showNextQuestion()">✨</button>
+    </div>
+
+    <!-- Multi-step Form -->
+    <div id="form-step" class="form-container" style="display: none;">
+        <!-- Question 1 -->
+        <div id="question1" class="question-container">
+            <p>Are you feeling stuck?</p>
+            <input type="radio" id="yes" name="stuck" value="Yes" onclick="showNextButton('next1')"> Yes
+            <button id="next1" class="next-button" onclick="goToNextQuestion('question1', 'question2')">Next</button>
+        </div>
+
+        <!-- Question 2 -->
+        <div id="question2" class="question-container" style="display: none;">
+            <p>Are you dreaming of...</p>
+            <input type="checkbox" name="dream" value="still waters" onclick="checkAllCheckboxes('dream', 'next2')">
+            Still waters<br>
+            <input type="checkbox" name="dream" value="a country" onclick="checkAllCheckboxes('dream', 'next2')"> A
+            country that is not a prison to break out of<br>
+            <input type="checkbox" name="dream" value="nose ring" onclick="checkAllCheckboxes('dream', 'next2')"> The
+            nose ring of hope<br>
+            <button id="next2" class="next-button" onclick="goToNextQuestion('question2', 'question3')">Next</button>
+        </div>
+
+        <!-- Question 3 -->
+        <div id="question3" class="question-container" style="display: none;">
+            <p>You've been studying the horizon...</p>
+            <input type="text" id="horizon-answer" placeholder=" "
+                oninput="checkAnswer('horizon-answer', 'next3')">
+            <button id="next3" class="next-button" onclick="goToNextQuestion('question3', 'question4')">Next</button>
+        </div>
+
+        <!-- Question 4 -->
+        <div id="question4" class="question-container" style="display: none;">
+            <p>Carving the line onto your mind's eye, hoping visualizations get you half the way there</p>
+            <input type="checkbox" name="carve" value="y" onclick="checkAllCheckboxes('carve', 'next4')"> Y
+            <input type="checkbox" name="carve" value="e" onclick="checkAllCheckboxes('carve', 'next4')"> E
+            <input type="checkbox" name="carve" value="s" onclick="checkAllCheckboxes('carve', 'next4')"> S
+            <button id="next4" class="next-button" onclick="goToNextQuestion('question4', 'question5')">Next</button>
+        </div>
+
+        <!-- Question 5 -->
+        <div id="question5" class="question-container" style="display: none;">
+            <p>Are you ready to become a global citizen?</p>
+            <input type="radio" name="global" value="yes" onclick="showNextButton('next5')"> Yes
+            <button id="next5" class="next-button" onclick="goToNextQuestion('question5', 'question6')">Next</button>
+        </div>
+
+        <!-- Question 6 -->
+        <div id="question6" class="question-container" style="display: none;">
+            <p>Do you have 250,000 US Dollars?</p>
+            <input type="radio" name="money" value="yes"> Yes<br>
+            <input type="radio" name="money" value="no"> No<br>
+            <input type="radio" name="money" value="skip" onclick="showNextButton('next6')"> Skip for now
+            <button id="next6" class="next-button" onclick="goToNextQuestion('question6', 'image-step2')">Next</button>
+        </div>
+
+        <!-- Question 7 / Step 8 -->
+        <div id="image-step2" class="image-container" style="display: none;">
+            <img src="assets/horizon.jpg" alt="Horizon" class="horizon-image" style="transform: scale(1.4);">
+            <button class="sparkle-button"
+                onclick="window.open('https://www.instagram.com/p/DADKNDQPx2m', '_blank', 'width=375,height=800,left=400,top=250,toolbar=no,scrollbars=no,resizable=yes'); goToNextQuestion('image-step2', 'question7')">✨</button>
+        </div>
+
+        <!-- Question 8 -->
+        <div id="question7" class="question-container" style="display: none;">
+            <p>How did you hear about our website? (100 characters)</p>
+            <!-- Updated textarea with larger dimensions -->
+            <textarea id="hear-about" rows="6" cols="50" style="width: 100%; resize: both;font-size: 30px;"
+                oninput="updateCharacterCounter('hear-about', 'char-counter'); checkCharacterCount('hear-about', 'next7')"></textarea>
+            <div id="char-counter" style="font-family: 'Times New Roman', Times, serif; color: black;">Characters left:
+                100</div>
+            <button id="next7" class="next-button" style="display:none;"
+                onclick="goToNextQuestion('question7', 'image-step3')">Next</button>
+        </div>
+
+        <!-- Image Step 3 -->
+        <div id="image-step3" class="image-container" style="display: none;">
+            <img src="assets/horizon.jpg" alt="Horizon" class="horizon-image" style="transform: scale(1.6);">
+            <button class="sparkle-button"
+                onclick="window.open('https://www.instagram.com/p/DClfHCUPQzL', '_blank', 'width=375,height=800,left=400,top=250,toolbar=no,scrollbars=no,resizable=yes'); goToNextQuestion('image-step3', 'question8')">✨</button>
+        </div>
+
+        <!-- Question 9 -->
+        <div id="question8" class="question-container" style="display: none;">
+            <p>What is privilege to you?</p>
+            <input type="radio" name="privilege" value="Financial stability"> Financial stability<br>
+            <input type="radio" name="privilege" value="International mobility"> International mobility<br>
+            <input type="radio" name="privilege" value="Security"> Security<br>
+            <input type="radio" name="privilege" value="Other" onclick="showTextField('other-privilege')"> Other
+            <input type="text" id="other-privilege" style="display:none; resize: both;font-size: 30px;" placeholder="Please specify"
+                oninput="checkWordCount('other-privilege', 'next8')"><br>
+            <button id="next8" class="next-button" style="display:none;"
+                onclick="window.location.href='2d-beast-mode.html'">Submit</button>
+        </div>
+    </div>
+    <script>
+        let horizonImageScale = 1.0;
+        function increaseImageSize() {
+            horizonImageScale += 0.1;
+            const images = document.querySelectorAll('.horizon-image');
+            images.forEach(image => {
+                image.style.transform = `scale(${horizonImageScale})`;
+            });
+        }
+        function checkCharacterCount(inputId, buttonId) {
+            const input = document.getElementById(inputId);
+            if (input.value.length >= 100) {
+                showNextButton(buttonId);
+            }
+        }
+        function showTextField(fieldId) {
+            document.getElementById(fieldId).style.display = 'inline';
+        }
+        function checkAllCheckboxes(name, buttonId) {
+            const checkboxes = document.getElementsByName(name);
+            let allChecked = true;
+            for (let checkbox of checkboxes) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                    break;
+                }
+            }
+            if (allChecked) {
+                showNextButton(buttonId);
+            }
+        }
+        function showNextQuestion() {
+            document.getElementById('image-step').style.display = 'none';
+            document.getElementById('form-step').style.display = 'block';
+        }
+        function showNextButton(buttonId) {
+            document.getElementById(buttonId).style.display = 'inline';
+        }
+
+        function goToNextQuestion(currentId, nextId) {
+            increaseImageSize();
+            document.getElementById(currentId).style.display = 'none';
+            document.getElementById(nextId).style.display = 'block';
+        }
+
+        function checkAnswer(inputId, buttonId) {
+            const input = document.getElementById(inputId);
+            if (input.value.toLowerCase() === 'yes') {
+                showNextButton(buttonId);
+            }
+        }
+
+        function checkAllRadios(name, buttonId) {
+            const radios = document.getElementsByName(name);
+            let allChecked = true;
+            for (let radio of radios) {
+                if (!radio.checked) {
+                    allChecked = false;
+                    break;
+                }
+            }
+            if (allChecked) {
+                showNextButton(buttonId);
+            }
+        }
+
+        function updateCharacterCounter(inputId, counterId) {
+            const input = document.getElementById(inputId);
+            const counter = document.getElementById(counterId);
+            const remaining = 100 - input.value.length;
+            counter.textContent = remaining >= 0 ? `Characters left: ${remaining}` : `Characters over limit: ${Math.abs(remaining)}`;
+            counter.style.color = remaining >= 0 ? 'black' : 'red';
+        }
+
+        function checkWordCount(inputId, buttonId) {
+            const input = document.getElementById(inputId);
+            const wordCount = input.value.trim().split(/\s+/).length;
+            if (wordCount > 6) {
+                showNextButton(buttonId);
+            }
+        }
+    </script>
+    <!-- Red Squiggly Line -->
+    <div class="squiggly-line">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none">
+            <path d="M0 5 Q 5 0, 10 5 T 20 5 T 30 5 T 40 5 T 50 5 T 60 5 T 70 5 T 80 5 T 90 5 T 100 5" />
+        </svg>
+    </div>
+
+</body>
+
+</html>
